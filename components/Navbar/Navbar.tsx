@@ -1,8 +1,9 @@
 import { Search, User } from "lucide-react"
 import Link from "next/link"
+import NavLink from "./NavLink"
 
 const Navbar = () => {
-    
+
     return (
         <header>
             <nav className="flex justify-between items-center gap-30 w-[80vw] m-auto px-10 py-5">
@@ -13,8 +14,9 @@ const Navbar = () => {
 
                 {/* Navigation */}
                 <div className="flex gap-10 text-lg">
-                    <Link href="/">Movies</Link>
-                    <Link href="/">Genre</Link>
+                    <NavLink href="/" children="Home" />
+                    <NavLink params={"page=1"} href="/movies" children="Movies" />
+                    <NavLink href="/genre" children="Genre"/>
                 </div>
 
                 {/* Search Input */}
@@ -35,6 +37,7 @@ const Navbar = () => {
                 </div>
             </nav>
         </header>
+    
     )
 }
 
