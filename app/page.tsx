@@ -1,24 +1,18 @@
-import Card from "@/components/Card";
 import Carousel from "@/components/Carousel";
-import MovieCarousel from "@/components/MovieCarousel";
+import MovieCarousel from "@/components/MovieComponents/MovieCarousel";
+import { getPopular, getTopRated, getTrending, getUpcoming } from "@/lib/tmdb";
 
-export default function Home() {
+export default async function Home() {
+  const [trending, popular,topRated] = await Promise.all([getTrending(), getPopular(), getTopRated()])
+
   return (
     <main className="px-20 mb-10">
-      <Carousel />
+      <Carousel movies={trending.results} />
 
-      <div className="mt-10">
-        <h4 className="text-2xl mb-2">Trending Movies</h4>
-        <MovieCarousel />
-      </div>
-      <div className="mt-10">
-        <h4 className="text-2xl mb-2">Popular Movies</h4>
-        <MovieCarousel />
-      </div>
-      <div className="mt-10">
-        <h4 className="text-2xl mb-2">Top Rated Movies</h4>
-        <MovieCarousel />
-      </div>
+      <MovieCarousel title="Trending" movies={trending.results} />
+      <MovieCarousel title="Popular" movies={popular.results} />
+      <MovieCarousel title="Top Rated" movies={topRated.results} />
+      {/* <MovieSection title="Upcoming" movies={upcoming.results} /> */}
     </main>
   );
 }
