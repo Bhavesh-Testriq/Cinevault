@@ -1,20 +1,7 @@
 import { PlayCircle } from "lucide-react";
-import MovieCardImage from "./MovieCardImage";
+import MovieCardImage from "../MovieCardImage";
 import Image from "next/image";
-import { genreMap } from "./MovieLargeCard";
 import Link from "next/link";
-
-
-interface CastMember {
-    original_name: string;
-    known_for_department: string;
-    profile_path: string;
-}
-interface CrewMember {
-    original_name: string;
-    known_for_department: string;
-    profile_path: string;
-}
 
 interface DetailedMovieProps {
     title: string;
@@ -23,13 +10,11 @@ interface DetailedMovieProps {
     vote_average: number;
     release_date: string;
     genre_ids: { name: string }[];
-    cast: CastMember[];
-    crew: CrewMember[];
     homepage: string;
     runtime: number;
 }
 
-export default function MovieHeroSection({ title, overview, poster_path, vote_average, release_date, genre_ids, cast, crew, homepage, runtime }: DetailedMovieProps) {
+export default function MovieHeroSection({ title, overview, poster_path, vote_average, release_date, genre_ids, homepage, runtime }: DetailedMovieProps) {
     const year = release_date ? release_date.split('-')[0] : "TBA";
     const hours = Math.floor(runtime / 60);
     const minutes = runtime % 60;
@@ -92,7 +77,7 @@ export default function MovieHeroSection({ title, overview, poster_path, vote_av
                             {overview}
                         </p>
 
-                        <Link href={homepage} className="mt-4 flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:bg-gray-200">
+                        <Link href={homepage} target="_blank" className="mt-4 flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:bg-gray-200">
                             <PlayCircle className="h-5 w-5" />
                             Watch Now
                         </Link>

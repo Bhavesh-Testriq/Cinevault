@@ -36,35 +36,52 @@ interface MovieCardProps {
 export default function MovieLargeCard({ id, title, description, posterPath, voteAverage, releaseDate, genre }: MovieCardProps) {
     const year = releaseDate ? releaseDate.split('-')[0] : "TBA"
     return (
-        <Link href={`/movies/${id}`}>
-            <div className="group flex w-md cursor-pointer items-center gap-5 rounded-xl border border-white/5 bg-white/[0.03] p-3 shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:border-white/10 hover:bg-white/[0.05] hover:shadow-xl hover:shadow-black/30">
-                {/* Poster */}
+        <Link href={`/movies/${id}`} className="block w-full">
+  <div className="group flex w-full min-w-0 flex-col items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-3 shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:border-white/10 hover:bg-white/[0.05] sm:flex-row sm:items-center">
 
-                <MovieCardImage title={title} posterPath={posterPath} />
+    {/* Poster */}
+    <div className="shrink-0">
+      <MovieCardImage
+        title={title}
+        posterPath={posterPath}
+      />
+    </div>
 
-                {/* Movie Information */}
-                <div className="min-w-0 flex-1 space-y-3">
-                    <h4 className="truncate text-lg font-semibold text-white">
-                        {title}
-                    </h4>
+    {/* Content */}
+    <div className="w-full min-w-0 flex-1 overflow-hidden text-center sm:text-left">
 
-                    <p className="line-clamp-2 text-sm leading-5 text-gray-400">
-                        {description}
-                    </p>
+      <h4
+        className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-lg font-semibold text-white"
+        title={title}
+      >
+        {title}
+      </h4>
 
-                    <div className="text-xs text-gray-300">
-                        ⭐ {voteAverage.toFixed(1)} <span className="mx-1 text-gray-600">•</span> {year}
-                    </div>
+      {/* Description */}
+      <p className="mt-2 hidden text-sm leading-5 text-gray-400 sm:line-clamp-2">
+        {description}
+      </p>
 
-                    <div className="truncate text-xs text-gray-400">
-                        {genreMap[genre[0]] && <> {genreMap[genre[0]]}
-                            <span className="mx-1">•</span></>}
-                        {genreMap[genre[1]] && <> {genreMap[genre[1]]}
-                            <span className="mx-1">•</span></>}
-                        {genreMap[genre[2]] && <>{genreMap[genre[2]]}</>}
-                    </div>
-                </div>
-            </div>
-        </Link>
+      {/* Rating */}
+      <div className="mt-2 text-xs text-gray-300">
+        ⭐ {voteAverage?.toFixed(1)}
+        <span className="mx-1 text-gray-600">•</span>
+        {year}
+      </div>
+
+      {/* Genres */}
+      <div className="mt-2 hidden truncate text-xs text-gray-400 sm:block">
+        {genre?.[0] && genreMap[genre[0]]}
+        {genre?.[1] && genreMap[genre[1]] && (
+          <> • {genreMap[genre[1]]}</>
+        )}
+        {genre?.[2] && genreMap[genre[2]] && (
+          <> • {genreMap[genre[2]]}</>
+        )}
+      </div>
+
+    </div>
+  </div>
+</Link>
     )
 }

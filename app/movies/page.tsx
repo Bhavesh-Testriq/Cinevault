@@ -14,7 +14,7 @@ export default async function MoviePage({ searchParams }: Movieprops) {
     const movies = await discoverMovies(params);   
 
     return (
-        <main className="px-20 mb-10">
+        <main className="mb-10 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
             <Carousel movies={movies.results} />
 
             {/* Movies Populated */}

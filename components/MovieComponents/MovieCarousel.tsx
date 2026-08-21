@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Card from "./MovieCard";
+import MovieCard from "./MovieCard";
 import Link from "next/link";
 
 interface Movie {
@@ -25,7 +25,7 @@ export default function MovieCarousel({ title, movies }: MovieSectionProps) {
     if (!rowRef.current) return;
 
     rowRef.current.scrollBy({
-      left: direction === "right" ? 500 : -500,
+      left: direction === "right" ? 200 : -200,
       behavior: "smooth",
     });
   };
@@ -52,7 +52,7 @@ export default function MovieCarousel({ title, movies }: MovieSectionProps) {
         >
           {
             movies.map((movie) => (
-              <Card
+              <MovieCard
                 key={movie.id}
                 id={movie.id}
                 title={movie.title}
