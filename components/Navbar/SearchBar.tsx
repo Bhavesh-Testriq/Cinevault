@@ -33,7 +33,7 @@ export default function SearchBar() {
 
 
     return (
-        <form action="">
+        <form onSubmit={(event) => event.preventDefault()}>
             <input
                 type="text"
                 name="q"
