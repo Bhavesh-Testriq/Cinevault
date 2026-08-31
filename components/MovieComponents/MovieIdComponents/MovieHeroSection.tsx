@@ -1,20 +1,20 @@
-import { PlayCircle } from "lucide-react";
 import MovieCardImage from "../MovieCardImage";
 import Image from "next/image";
-import Link from "next/link";
+import TrailerModal from "./TrailerModal";
 
 interface DetailedMovieProps {
-    title: string;
-    overview: string;
-    poster_path: string;
-    vote_average: number;
-    release_date: string;
-    genre_ids: { name: string }[];
-    homepage: string;
-    runtime: number;
+    title: string,
+    overview: string,
+    poster_path: string,
+    vote_average: number,
+    release_date: string,
+    genre_ids: { name: string }[],
+    homepage: string,
+    runtime: number,
+    trailer_key?: string,
 }
 
-export default function MovieHeroSection({ title, overview, poster_path, vote_average, release_date, genre_ids, homepage, runtime }: DetailedMovieProps) {
+export default function MovieHeroSection({ title, overview, poster_path, vote_average, release_date, genre_ids, homepage, runtime, trailer_key }: DetailedMovieProps) {
     const year = release_date ? release_date.split('-')[0] : "TBA";
     const hours = Math.floor(runtime / 60);
     const minutes = runtime % 60;
@@ -77,10 +77,9 @@ export default function MovieHeroSection({ title, overview, poster_path, vote_av
                             {overview}
                         </p>
 
-                        <Link href={homepage} target="_blank" className="mt-4 flex w-fit items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:scale-105 hover:bg-gray-200">
-                            <PlayCircle className="h-5 w-5" />
-                            Watch Now
-                        </Link>
+                        <div className="mt-4">
+                            <TrailerModal trailer_key={trailer_key} />
+                        </div>
 
                     </div>
                 </div>
