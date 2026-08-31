@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Roboto, Poppins } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const roboto = Roboto({
   weight: ["400", "500", "600"],
@@ -22,6 +23,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col relative">
         <Navbar />
         {children}
+        <SpeedInsights />
+
       </body>
     </html>
   );
