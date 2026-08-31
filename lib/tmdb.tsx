@@ -3,7 +3,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 async function tmdbFetch(endpoint: string, params: Record<string, string> = {}) {
     const query = new URLSearchParams({
         ...params,
-        include_adult: "false",
+        // include_adult: "false",
     }).toString();
 
     const res = await fetch(`${BASE_URL}${endpoint}?${query}`, {
@@ -15,7 +15,7 @@ async function tmdbFetch(endpoint: string, params: Record<string, string> = {}) 
     });
 
     if (!res.ok) throw new Error(`TMDB ${res.status}: ${endpoint}`);
-    
+
     return await res.json();
 }
 
@@ -37,3 +37,19 @@ export const searchMovies = (query: string, page = 1) =>
 
 export const discoverMovies = (params: Record<string, string>) =>
     tmdbFetch("/discover/movie", params);
+
+export const getMovieVideos = (id: string) => 
+    tmdbFetch(`/movie/${id}/videos`, { language: "en-US" })
+
+
+export function getTrailer(videos: { results: any[] } | undefined) {
+    if (!videos?.results.length) return null;
+
+    const youtubeVideos = videos.results.filter((video) => video.site === "YouTube");
+
+    return (
+        youtubeVideos.find((v) => v.type === "Trailer" && v.official) ??
+        youtubeVideos.find(v => v.type === "Trailer") ??
+        youtubeVideos[0]
+    )
+}
