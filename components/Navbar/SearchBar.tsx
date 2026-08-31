@@ -9,10 +9,22 @@ export default function SearchBar() {
     const router = useRouter()
     const pathname = usePathname()
 
-    const params = new URLSearchParams(searchParams.toString())
-    const [query, setQuery] = useState(params.get('q')?? "")
-    const deboundedQuery = useDebounce(query, 500);
+    const [query, setQuery] = useState(searchParams.get('q') ?? "")
+    let deboundedQuery = useDebounce(query, 500);
     const isFirstRender = useRef(true);
+
+    const runSearch = (term: string) => {
+        const trimmed = term.trim()
+        const params = new URLSearchParams(searchParams.toString());
+
+        if (trimmed) {
+            params.set('q', trimmed)
+            params.set('page', "1")
+            router.push(`/search?${params.toString()}`)
+        } else if (pathname === "/search") {
+            router.push("/search");
+        }
+    };
 
     useEffect(() => {
         if (isFirstRender.current) {
@@ -20,20 +32,18 @@ export default function SearchBar() {
             return;
         }
 
-        const trimmed = deboundedQuery.trim()
-        params.set('q', deboundedQuery)
-        params.set('page', String(1))
-
-        if (trimmed) {
-            router.push(`/search?${params.toString()}`)
-        } else if (pathname === "/search") {
-            router.push("/search")
-        }
+        runSearch(deboundedQuery)
     }, [deboundedQuery])
 
 
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        runSearch(query)
+    }
+
     return (
-        <form onSubmit={(event) => event.preventDefault()}>
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 name="q"

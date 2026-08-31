@@ -14,7 +14,7 @@ export default function MovieGrid({ movies }: { movies: Movie[] }) {
     return (
         <div className="grid lg:grid-cols-3 grid-cols-2 gap-5 mt-10 ">
             {
-                movies.slice(0, (movies.length - (movies.length % 3))).map((movie) => (
+                movies.map((movie) => (
                     <MovieLargeCard
                         key={movie.id}
                         id={movie.id}
