@@ -1,6 +1,7 @@
 import { Search, User } from "lucide-react"
 import NavLink from "./NavLink"
 import SearchBar from "./SearchBar"
+import { Suspense } from "react"
 
 const Navbar = () => {
 
@@ -32,7 +33,9 @@ const Navbar = () => {
                 {/* Search */}
                 <div className="flex w-full min-w-0 items-center rounded-full bg-zinc-800 px-4 py-2 lg:flex-1">
                     <Search className="h-5 w-5 shrink-0 text-zinc-400" />
-                    <SearchBar />
+                    <Suspense fallback={null}>
+                        <SearchBar />
+                    </Suspense>
                 </div>
 
                 {/* Profile - desktop */}

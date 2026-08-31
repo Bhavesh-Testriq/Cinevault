@@ -1,6 +1,7 @@
 import MovieGrid from "@/components/MovieComponents/MovieGrid";
 import Pagination from "@/components/Pagination";
 import { searchMovies } from "@/lib/tmdb";
+import { Suspense } from "react";
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string; page?: string }> }) {
     const params = await searchParams;
@@ -31,7 +32,9 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             ) : (
                 <>
                     <MovieGrid movies={data.results} />
-                    <Pagination totalPages={Math.min(data.total_pages, 500)} currentPage={page} />
+                    <Suspense fallback={null}>
+                        <Pagination totalPages={Math.min(data.total_pages, 500)} currentPage={page} />
+                    </Suspense>
                 </>
             )}
         </main>
