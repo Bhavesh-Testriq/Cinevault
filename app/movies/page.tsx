@@ -2,10 +2,16 @@ import Carousel from "@/components/Carousel";
 import MovieGrid from "@/components/MovieComponents/MovieGrid";
 import Pagination from "@/components/Pagination";
 import { discoverMovies } from "@/lib/tmdb";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
 interface Movieprops {
     searchParams: Promise<{ page?: string }>
+}
+
+export const metadata: Metadata = {
+    title: "Explore & Watch out of Thousands | MUVIEEX",
+    description: "Browse thousands of movies, discover what's trending, and uncover something new to add to your watchlist."
 }
 
 export default async function MoviePage({ searchParams }: Movieprops) {
