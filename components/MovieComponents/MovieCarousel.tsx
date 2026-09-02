@@ -41,6 +41,7 @@ export default function MovieCarousel({ title, movies }: MovieSectionProps) {
         <button
           onClick={() => scroll("left")}
           className="absolute cursor-pointer left-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/80 text-white shadow-lg transition hover:bg-black"
+          name="previous"
         >
           <ChevronLeft size={28} />
         </button>
@@ -48,7 +49,7 @@ export default function MovieCarousel({ title, movies }: MovieSectionProps) {
         {/* Movie Row */}
         <div
           ref={rowRef}
-          className="flex gap-5 overflow-hidden"
+          className="flex gap-5 overflow-x-scroll hide-scrollbar"
         >
           {
             movies.map((movie) => (
@@ -67,6 +68,7 @@ export default function MovieCarousel({ title, movies }: MovieSectionProps) {
         <button
           onClick={() => scroll("right")}
           className="absolute cursor-pointer right-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/80 text-white shadow-lg transition hover:bg-black"
+          name="next"
         >
           <ChevronRight size={28} />
         </button>

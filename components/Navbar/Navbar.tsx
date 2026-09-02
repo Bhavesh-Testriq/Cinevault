@@ -1,25 +1,20 @@
-import { Search, User } from "lucide-react"
+import { Search } from "lucide-react"
 import NavLink from "./NavLink"
 import SearchBar from "./SearchBar"
 import { Suspense } from "react"
 
-const Navbar = () => {
+const Navbar = ({sekuya, pottaOne}: {sekuya: string, pottaOne: string}) => {
 
     return (
         <header className="border-b border-white/5">
             <nav className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-8 lg:px-8 lg:py-5">
 
                 {/* Top row / Logo */}
-                <div className="flex  sm:gap-10">
+                <div className="flex sm:gap-10">
                     <div className="flex w-full items-center justify-between lg:w-auto">
-                        <h3 className="text-2xl font-bold sm:text-3xl">
-                            CINEVAULT
+                        <h3 className={`${pottaOne} font-bold text-2xl md:text-4xl`}>
+                            MUVIEE<span className="text-teal-600">X</span>
                         </h3>
-
-                        {/* Profile - visible here on mobile */}
-                        {/* <div className="rounded-full border border-zinc-50/20 p-2 lg:hidden">
-                        <User className="h-5 w-5" />
-                    </div> */}
 
                         {/* Navigation */}
                     </div>
@@ -38,10 +33,6 @@ const Navbar = () => {
                     </Suspense>
                 </div>
 
-                {/* Profile - desktop */}
-                {/* <div className="hidden shrink-0 rounded-full border border-zinc-50/20 p-2 lg:block">
-                    <User className="h-5 w-5" />
-                </div> */}
             </nav>
         </header>
 

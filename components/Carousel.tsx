@@ -56,6 +56,7 @@ export default function Carousel({ movies }: MovieSectionProps) {
                             alt={slide.title}
                             fill
                             className="object-cover"
+                            loading="eager"
                         />
                     ) : (
                         <div className="flex h-full w-full items-center justify-center text-gray-400">
